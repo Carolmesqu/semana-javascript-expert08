@@ -6,13 +6,16 @@ export default class View {
     #txtfileName = document.getElementById('fileName')
     #fileUploadWrapper = document.getElementById('fileUploadWrapper')
     #elapsed = document.getElementById('elapsed')
-    
+    /** @type {HTMLCanvasElement} */
     #canvas = document.getElementById('preview-144p')
     
     constructor() {
         this.configureBtnUploadClick()
     }
 
+    getCanvas() {
+        return this.#canvas.transferControlToOffscreen()
+    }
     parseBytesIntoMBAndGB(bytes) {
         const mb = bytes / (1024 * 1024)
         // if mb is greater than 1024, then convert to GB
